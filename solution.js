@@ -47,20 +47,14 @@ async function getCurrentUser() {
 app.get("/", async (req, res) => {
   const countries = await checkVisisted();
   const currentUser = await getCurrentUser();
-  const token = req.query.token;
-  if (!token) return res.status(401).send("Access denied. No token provided.");
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userEmail = decoded.email;
-
     // now you can fetch user data or display the page;
     res.render("index.ejs", {
     countries: countries,
     total: countries.length,
     users: users,
     color: currentUser.color,
-    email: userEmail,
   });
   } catch (err) {
     res.status(400).send("Invalid token.");
