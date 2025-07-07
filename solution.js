@@ -13,10 +13,8 @@ const { Pool } = pkg;
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  ssl: { rejectUnauthorized: false } // Required by Render
 });
-
-console.log("DB URL:", process.env.DATABASE_URL);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
