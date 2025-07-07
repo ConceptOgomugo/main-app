@@ -5,14 +5,16 @@ import pg from "pg";
 const app = express();
 const port = 5000;
 
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "Ideal_Countries",
-  password: "Ococ(2008)//",
-  port: 5432,
+import dotenv from 'dotenv';
+dotenv.config();
+
+import pkg from 'pg';
+const { Pool } = pkg;
+
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Required by Render
 });
-db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
