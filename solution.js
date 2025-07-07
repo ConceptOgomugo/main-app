@@ -16,6 +16,8 @@ const db = new Pool({
   ssl: { rejectUnauthorized: false } // Required by Render
 });
 
+console.log("DB URL:", process.env.DATABASE_URL);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
